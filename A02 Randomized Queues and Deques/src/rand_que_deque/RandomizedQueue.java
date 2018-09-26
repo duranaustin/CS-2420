@@ -142,12 +142,44 @@ public class RandomizedQueue<T> implements Iterable<T>
 
 	public static void main(String[] args)
 	{
-		// TODO test enqueue
-		// TODO test dequeue
-		// TODO test iterator
-		// TODO test isEmpty
-		// TODO test size
+		// create RandomizedQueue size 2 test empty and size
+		RandomizedQueue<String> rq = new RandomizedQueue<String>(2);
+		assert rq.isEmpty() == true;
+		assert rq.size() == 0;
+
+		// test enqueue and size and sample
+		rq.enqueue("a");
+		assert rq.size() == 1;
+		assert rq.sample().equals("a");
+
+		// test dequeue size and empty
+		assert rq.dequeue().equals("a");
+		assert rq.size() == 0;
+		assert rq.isEmpty() == true;
+
+		assert rq.iterator().getClass() == Iterator.class;
+		assert rq.iterator().hasNext() == false;
+
+		try
+		{
+			rq.remove();
+		} catch (UnsupportedOperationException e)
+		{
+			assert e.getClass() == UnsupportedOperationException.class;
+			System.out.println("caught remove exception");
+		}
+		try
+		{
+			rq.iterator().next();
+
+		} catch (NoSuchElementException e)
+		{
+			assert e.getClass() == NoSuchElementException.class;
+			System.out.println("caught no such element exception");
+		}
+
 		// TODO test exceptions
+		System.out.println("tests done");
 
 	}
 
