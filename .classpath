@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="A02 Randomized Queues and Deques/src"/>
+	<classpathentry kind="lib" path="C:/Users/aduran/Downloads/algs4.jar"/>
+	<classpathentry kind="output" path="A02 Randomized Queues and Deques/bin"/>
+</classpath>

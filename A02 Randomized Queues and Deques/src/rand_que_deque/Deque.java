@@ -3,11 +3,8 @@ package rand_que_deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import javax.xml.soap.Node;
-
-
 public class Deque<Item> implements Iterable<Item> {
-	
+
 	private int k;
 	private Node first;
 	private Node last;
@@ -34,7 +31,8 @@ public class Deque<Item> implements Iterable<Item> {
 	    */
 	   public boolean isEmpty() 
 	   {
-		   return first == null;
+		   return first == null && last == null;
+		   
 	   }
 
 	   /**
@@ -55,9 +53,13 @@ public class Deque<Item> implements Iterable<Item> {
 			   throw new NullPointerException("Item added cannot be empty");
 		   }
 		   
+		   
 		   Node oldfirst = first;
 	       first = new Node();
 	       first.item = item;
+	       if(size()==0) {
+			   last =first;
+		   }
 	       first.next = oldfirst;
 	       k++;
 	   } 
@@ -75,6 +77,10 @@ public class Deque<Item> implements Iterable<Item> {
 		   Node oldlast = last;
 	       last = new Node();
 	       last.item = item;
+	       if(size()==0) {
+			   first = last;
+		   }
+	       
 	       //Perhaps a counter to count how many Deque objects are created?
 	       //Something to reach the end of the linked list-1 last = oldLast
 	       //Consider looking at LinkedList implementation for Queue? Possibly Stack?
@@ -95,6 +101,10 @@ public class Deque<Item> implements Iterable<Item> {
 	        Item item = first.item;        // save item to return
 	        first = first.next;            // delete first node
 	        k--;
+	        if(size()==0) {
+	        	first=null;
+	        	last=null;
+	        }
 	        return item; 
 	   }             
 	   
@@ -112,6 +122,10 @@ public class Deque<Item> implements Iterable<Item> {
 	        Item item = last.item;        // save item to return
 	        last = last.next;            // delete first node
 	        k--;
+	        if(size()==0) {
+	        	first=null;
+	        	last=null;
+	        }
 	        return item; 
 	   }  
 	   
@@ -125,11 +139,20 @@ public class Deque<Item> implements Iterable<Item> {
 	   
 	    // an iterator, doesn't implement remove() since it's optional
 	    private class ListIterator implements Iterator<Item> {
+	    	
 	        private Node current = first;
-	        public boolean hasNext()  { return current != null;                     }
-	        public void remove()      { throw new UnsupportedOperationException();  }
+	        
+	        public boolean hasNext()  
+	        { 
+	        	return current != null;                     
+	        }
+	        public void remove()      
+	        { 
+	        	throw new UnsupportedOperationException();  
+	        }
 
-	        public Item next() {
+	        public Item next() 
+	        {
 	            if (!hasNext()) throw new NoSuchElementException();
 	            Item item = current.item;
 	            current = current.next; 
@@ -139,8 +162,31 @@ public class Deque<Item> implements Iterable<Item> {
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		// Creating a deque object(linked-list)
+		Deque deque = new Deque();
+		// Testing if deque is empty before adding elements - should be "true" due to deque of length 0
+		assert deque.isEmpty() == true;
+		// Add elements to deque
+		deque.addFirst("Hello");
+		// Check if empty - should be "false" due to adding "Hello"
+		assert deque.isEmpty() == false;
+		// Check if "Hello" exists by removeFirst
+		assert deque.removeFirst() == "Hello";
+		// Check if empty - should be "true" due to removing "Hello"
+		assert deque.isEmpty() == true;
+		// Add more than one element
+		deque.addFirst("World");
+		deque.addFirst("Cat");
+		// Check size - should be 2 due to "World" and "Cat"
+		assert deque.size() == 2;
+		// Check if removeLast "World" is removed since it was added last
+		assert deque.removeLast() == "World"; //Needs fixing
+		// Check size again - should be 1 after removeLast
+		assert deque.size() == 1;
+		// Check if addLast makes "World" the oldLast and "Java" the newLast 
+		deque.addLast("Java"); //Only works because I'm adding a last "Java" therefore I can remove it
+		assert deque.removeLast() == "Java"; 
 	}
 
 }
