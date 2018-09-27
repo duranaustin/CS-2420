@@ -199,7 +199,7 @@ public class RandomizedQueue<T> implements Iterable<T>
 
 		// Test resizing arrays
 		RandomizedQueue<String> rqSize = new RandomizedQueue<String>(2);
-		System.out.println(rqSize.length());
+
 		assert rqSize.length() == 2;
 		rqSize.enqueue("a");
 		rqSize.enqueue("a");
