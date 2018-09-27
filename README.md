@@ -23,8 +23,11 @@ Programming Assignment 2: Deques and Randomized Queues
  the element at the end to the element that is randomly chosen that needs to be
  removed by the dequeue method.
  
- Queue is implemented with a linked list. Head and tail are stored in order to 
- give constant time access to add at head or tail. 
+ Deque is implemented with a linked list. Head(first) and tail(last) are stored in order to 
+ give constant time access to add at head(first) or tail(last). We set the last to first if
+ addFirst is called, and vice versa for addLast. Since it is only required to remove and add from
+ the head and tail, we thought that a linked list would be the best possible solution. Setting
+ nodes at first and last help us to track where the Head is and where the Tail is. 
 
 
 /******************************************************************************
@@ -57,21 +60,25 @@ Deque:              ~  _____  bytes
  *  include any help from people (including course staff, lab TAs,
  *  classmates, and friends) and attribute them by name.
  *****************************************************************************/
-
-
-
+ We received no help on this assignment.
+ 
+	
 /******************************************************************************
  *  If you worked with a partner, assert below that you followed
  *  the protocol as described on the assignment page. Give one
  *  sentence explaining what each of you contributed.
  *****************************************************************************/
+ We followed the protocol as described on the assignment page. We decided to split up
+ our work by class. I(Austin Duran) worked mainly on the Deque.java class. (Ashton Chatelain)
+ worked mainly on the RandomizedQueue.java class. However, we both helped the other one 
+ out when we found ourselves stuck on implementing some parts of our classes.
 
 
 
 /******************************************************************************
  *  Describe any serious problems you encountered.                    
  *****************************************************************************/
-
+ No serious problems were encountered.
 
 
 /******************************************************************************
