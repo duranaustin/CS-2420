@@ -140,7 +140,10 @@ public class RandomizedQueue<T> implements Iterable<T>
 		return size;
 	}
 
-	public int length()
+	/**
+	 * Private method for testing resizing of array
+	 */
+	private int length()
 	{
 		return array.length;
 	}
