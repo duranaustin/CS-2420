@@ -5,20 +5,19 @@ import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdRandom;
 
+@SuppressWarnings("unchecked")
 public class RandomizedQueue<T> implements Iterable<T>
 {
 	private int size;
 	private T[] array;
 
-	@SuppressWarnings("unchecked")
 	public RandomizedQueue(int size)
 	{
 		this.size = 0;
-		array = (T[]) new Object[10];
+		array = (T[]) new Object[2];
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public void enqueue(T item)
 	{
 		if (item == null)
@@ -26,6 +25,8 @@ public class RandomizedQueue<T> implements Iterable<T>
 			throw new NullPointerException();
 		}
 
+		array[this.size] = item;
+		this.size++;
 		// TODO refactor resizing array into new method
 		if (this.array.length == this.size)
 		{
@@ -36,9 +37,6 @@ public class RandomizedQueue<T> implements Iterable<T>
 			}
 			this.array = tempArray;
 		}
-
-		array[this.size] = item;
-		this.size++;
 
 	}
 
@@ -58,7 +56,16 @@ public class RandomizedQueue<T> implements Iterable<T>
 		array[this.size - 1] = null;
 		size--;
 
-		// TODO resize array if it is too small.
+		// resize array if it is too small.
+		if (size <= array.length / 4)
+		{
+			T[] tempArray = (T[]) new Object[size * 2];
+			for (int i = 0; i < size(); i++)
+			{
+				tempArray[i] = array[i];
+			}
+			array = tempArray;
+		}
 
 		return temp;
 
@@ -70,7 +77,6 @@ public class RandomizedQueue<T> implements Iterable<T>
 	@Override
 	public Iterator<T> iterator()
 	{
-		@SuppressWarnings("unchecked")
 		final T[] tempArray = (T[]) new Object[this.size];
 
 		for (int i = 0; i < this.size; i++)
@@ -112,7 +118,11 @@ public class RandomizedQueue<T> implements Iterable<T>
 
 	public T sample()
 	{
-		return (T) array[StdRandom.uniform(0, this.array.length - 1)];
+		if (this.size() == 1)
+		{
+			return array[0];
+		}
+		return array[StdRandom.uniform(0, this.array.length - 1)];
 	}
 
 	public void remove()
@@ -128,6 +138,11 @@ public class RandomizedQueue<T> implements Iterable<T>
 	public int size()
 	{
 		return size;
+	}
+
+	public int length()
+	{
+		return array.length;
 	}
 
 	/*
@@ -157,28 +172,55 @@ public class RandomizedQueue<T> implements Iterable<T>
 		assert rq.size() == 0;
 		assert rq.isEmpty() == true;
 
-		assert rq.iterator().getClass() == Iterator.class;
-		assert rq.iterator().hasNext() == false;
+		Iterator<String> iter = rq.iterator();
+		assert iter.hasNext() == false;
 
-		try
-		{
-			rq.remove();
-		} catch (UnsupportedOperationException e)
-		{
-			assert e.getClass() == UnsupportedOperationException.class;
-			System.out.println("caught remove exception");
-		}
-		try
-		{
-			rq.iterator().next();
+		// catch unsupported operation for remove
+		// try
+		// {
+		// iter.remove();
+		// } catch (UnsupportedOperationException e)
+		// {
+		// System.out.println("caught remove exception\n");
+		// }
+		//
+		// // Test iterator next on no next
+		// try
+		// {
+		// iter.next();
+		//
+		// } catch (NoSuchElementException e)
+		// {
+		// System.out.println("caught no such element exception\n");
+		// }
 
-		} catch (NoSuchElementException e)
-		{
-			assert e.getClass() == NoSuchElementException.class;
-			System.out.println("caught no such element exception");
-		}
+		// Test resizing arrays
+		RandomizedQueue<String> rqSize = new RandomizedQueue<String>(2);
+		System.out.println(rqSize.length());
+		assert rqSize.length() == 2;
+		rqSize.enqueue("a");
+		rqSize.enqueue("a");
+		rqSize.enqueue("a");
+		assert rqSize.length() == 4;
+		rqSize.enqueue("a");
+		assert rqSize.length() == 8;
+		rqSize.enqueue("a");
+		rqSize.enqueue("a");
+		rqSize.enqueue("a");
+		rqSize.enqueue("a");
+		assert rqSize.length() == 16;
+		assert (rqSize.size() == 8);
 
-		// TODO test exceptions
+		rqSize.dequeue();
+		rqSize.dequeue();
+		rqSize.dequeue();
+		rqSize.dequeue();
+
+		assert rqSize.length() == 8;
+		rqSize.dequeue();
+		rqSize.dequeue();
+		assert rqSize.length() == 4;
+
 		System.out.println("tests done");
 
 	}
