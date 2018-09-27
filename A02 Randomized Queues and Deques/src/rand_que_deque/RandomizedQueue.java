@@ -84,6 +84,7 @@ public class RandomizedQueue<T> implements Iterable<T>
 			tempArray[i] = this.array[i];
 
 		}
+		StdRandom.shuffle(tempArray);
 
 		return new Iterator<T>()
 		{
@@ -202,15 +203,15 @@ public class RandomizedQueue<T> implements Iterable<T>
 
 		assert rqSize.length() == 2;
 		rqSize.enqueue("a");
-		rqSize.enqueue("a");
-		rqSize.enqueue("a");
+		rqSize.enqueue("b");
+		rqSize.enqueue("c");
 		assert rqSize.length() == 4;
-		rqSize.enqueue("a");
+		rqSize.enqueue("d");
 		assert rqSize.length() == 8;
-		rqSize.enqueue("a");
-		rqSize.enqueue("a");
-		rqSize.enqueue("a");
-		rqSize.enqueue("a");
+		rqSize.enqueue("e");
+		rqSize.enqueue("f");
+		rqSize.enqueue("g");
+		rqSize.enqueue("h");
 		assert rqSize.length() == 16;
 		assert (rqSize.size() == 8);
 
@@ -222,7 +223,15 @@ public class RandomizedQueue<T> implements Iterable<T>
 		assert rqSize.length() == 8;
 		rqSize.dequeue();
 		rqSize.dequeue();
+		assert rqSize.size() == 2;
+		Iterator<String> iterTwo = rqSize.iterator();
+		Iterator<String> iterThree = rqSize.iterator();
 		assert rqSize.length() == 4;
+
+		System.out.println("print iterTwo next " + iterTwo.next());
+		System.out.println("print iterThree next " + iterThree.next());
+		System.out.println("print iterThree next " + iterThree.next());
+		System.out.println("print iterTwo next " + iterTwo.next());
 
 		System.out.println("tests done");
 
