@@ -24,7 +24,7 @@ Programming Assignment 2: Deques and Randomized Queues
  removed by the dequeue method.
  
  Deque is implemented with a linked list. Head(first) and tail(last) are stored in order to 
- give constant time access to add at head(first) or tail(last). We set the last to first if
+ give constant time access to add at head(first) or tail(last). When empty we set the last to first if
  addFirst is called, and vice versa for addLast. Since it is only required to remove and add from
  the head and tail, we thought that a linked list would be the best possible solution. Setting
  nodes at first and last help us to track where the Head is and where the Tail is. 
@@ -42,7 +42,9 @@ Programming Assignment 2: Deques and Randomized Queues
  *  to the items (in the underlying array or linked list).
  *****************************************************************************/
 
-Randomized Queue:   ~  _____  bytes
+Randomized Queue:   ~28  bytes 
+
+Each RandomizedQueue has two fields: int size = 4 bytes + T[] = 24 bytes An iterator also has a 24 byte array
 
 Deque:              ~  _____  bytes
 
@@ -71,7 +73,7 @@ Deque:              ~  _____  bytes
  We followed the protocol as described on the assignment page. We decided to split up
  our work by class. I(Austin Duran) worked mainly on the Deque.java class. (Ashton Chatelain)
  worked mainly on the RandomizedQueue.java class. However, we both helped the other one 
- out when we found ourselves stuck on implementing some parts of our classes.
+ out when we found ourselves stuck on implementing some parts of our classes. Especially with the testing of each class.
 
 
 
@@ -86,3 +88,5 @@ Deque:              ~  _____  bytes
  *  on how much you learned from doing the assignment, and whether    
  *  you enjoyed doing it.                                             
  *****************************************************************************/
+ 
+We met up to code in a group study room in the B.R.I.C. and had fun ironing out details and our bad code. 
