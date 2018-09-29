@@ -46,10 +46,9 @@ Randomized Queue:   ~28  bytes
 
 Each RandomizedQueue has two fields: int size = 4 bytes + T[] = 24 bytes An iterator also has a 24 byte array
 
-Deque:              ~  _____  bytes
+Deque:              ~68  bytes
 
-
-
+Each Deque has 68 bytes allocated. Deque has three fields: int k = 4 bytes, Node first = 8 bytes, Node last = 8 bytes. --Contained inside of Deque is a private non-static class "Node" which has 1 field: Node next = 8 bytes. We account for extra padding 8 bytes, we don't account for "Item" type.
 
 /******************************************************************************
  *  Known bugs / limitations.
